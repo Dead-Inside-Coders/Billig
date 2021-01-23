@@ -18,7 +18,7 @@ int main()
 
 	const double begin = 1;// 1; //граници интегрирования 
 	const double end = 10;//200; //граници интегрирования 
-	const long int values_count = 1e6; //шаг 
+	const long int values_count = 1e7; //шаг 
 
 	double* web = new double[values_count]; 
 	web[0] = begin;
@@ -44,7 +44,7 @@ int main()
 		{
 			a = web[i];
 			b = web[i + 1];
-			prores += (b - a) * (F((a + b) / 2.0 - (b - a) / (2 * sqrt(3))) + F((a + b) / 2.0 + (b - a) / (2 * sqrt(3)))) / 2;
+			prores += (b - a) * ((F(a) + F(b)) / 2);
 		}
 #pragma omp atomic
 		res += prores;
