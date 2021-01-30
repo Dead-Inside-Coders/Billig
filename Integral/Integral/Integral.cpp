@@ -9,73 +9,82 @@
 
 inline double F(double x)
 {
-	return cos(sin(x * x) - x * x * x + x * x * x * x / 47 - 54 * cos(pow(x, -1.5))); //pow(x,2)*sin(x)
+	return 4 / (1 + pow(x, 2)); //pow(x,2)*sin(x)
 }
 
-long getIntegralResult(const double begin, const double end, const long steps) {
+double long definiteIntegralT(long double start, long double finish, long double eps) {
 
-	auto start_time = std::chrono::high_resolution_clock::now();
+	int n = 1;
+	double dx0 = (finish - start);
+	double dx = dx0;
+	double Sum0 = (F(start) + F(finish)) / 2;
+	double S0 = Sum0 * dx0;
+	double Sum1 = Sum0;
+	double S1 = S0;
+	double x0 = finish;
+	double x = x0;
 
-	//const double begin = 1;// 1; //граници интегрирования 
-	//const double end = 10;//200; //граници интегрирования 
-	//const long values_count = 1e7; //шаг 
-
-	double* web = new double[steps];
-	web[0] = begin;
-
-	//omp_set_num_threads(30); // число потоков
-
-#pragma omp parallel
+	while (true)
 	{
-#pragma omp for
-		for (int i = 1; i < steps - 1; ++i) {
-			web[i] = begin + ((end - begin) / (steps - 1)) * i;
-		}
-	}
-	web[steps - 1] = end;
-	double res = 0;
-
-
-	 
-#pragma omp parallel
-	{
-		double a, b; //граници интегрирования 
-		double prores = 0; //результат
-#pragma omp for
-		for (int i = 0; i < (steps - 1); ++i)
+		dx = dx / 2;
+		Sum1 = 0;
+		x0 = start + dx;
+		for (int k = 0; k < n; k++)
 		{
-			a = web[i];
-			b = web[i + 1];
-			prores += (b - a) * ((F(a) + F(b)) / 2);
+			x = x0 + k * dx0;
+			Sum1 += F(x);
 		}
-#pragma omp atomic
-		res += prores;
+		Sum1 += Sum0;
+		S1 = Sum1 * dx;
+		dx0 = dx;
+		n *= 2;
+		if (abs(S1 - S0) > eps)
+		{
+
+			Sum0 = Sum1;
+			S0 = S1;
+		}
+		else
+			break;
 	}
-
-	delete[] web;
-
-	auto stop_time = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_time - start_time);
-
-	//printf("Integral = %f\n", res);
-	//printf("Time spent: %d\n", duration.count());
-
-	return duration.count();
+	return S1;
 }
+
+
+double long Integral(long double a, long double b, long double eps, int p) {
+
+	double* result = new double[p];
+	//omp_set_num_threads(120);
+#pragma omp parallel
+	{
+#pragma omp for
+		for (int i = 0; i < p; i++)
+		{
+			double dx = (b - a) / p;
+			double start = 0, finish = 0;
+			start = a + i * dx;
+			finish = start + dx;
+			result[i] = definiteIntegralT(start, finish, eps);
+		}
+	}
+	double long finalResult = 0;
+
+	for (int i = 0; i < p; i++)
+	{
+		finalResult += result[i];
+	}
+	return finalResult;
+}
+
+
 
 int main()
 {
-	
-	for (int i = 4; i < 9; i++)
-	{
-		long results = 0;
-		for (int j = 0; j < 3; j++)
-		{
-			results += getIntegralResult(1, 10, pow(10,i));
-		}
-		printf("Avg time %d for epsilon 1e%d\n", results/2 ,i);
-	}
-	
+	auto start_time = std::chrono::high_resolution_clock::now();
+	printf("Result %f\n",Integral(0,10,1e-10,1e6));
+	auto stop_time = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_time - start_time);
+	printf("Time spent: %d\n", duration.count());
 
 }
 
