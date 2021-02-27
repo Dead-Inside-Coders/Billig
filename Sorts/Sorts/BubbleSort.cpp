@@ -15,6 +15,10 @@ public:
 				segmentSort(arr, segmentCount, i, length);
 			}
 		}
+		for (int i = 0; i < length; i++)
+		{
+			printf("%.0f\n", arr[i]);
+		}
 		merge(arr, segmentCount, length);
 	}
 
@@ -39,7 +43,6 @@ private:
 	}
 	void merge(double* arr, int segmentCount, int length) {
 
-		int m = length / segmentCount;
 		int index_min = 0;
 		double min = 0;
 		int i = 0;
@@ -56,7 +59,6 @@ private:
 			i = 0;
 			while (start[i] > finish[i]) i++;
 			index_min = i; min = arr[start[i]];
-
 			for (int j = i + 1; j < segmentCount; j++)
 			{
 				if (start[j] <= finish[j])
@@ -71,6 +73,7 @@ private:
 			tempArray[k] = arr[start[index_min]];
 			start[index_min] += segmentCount;
 		}
+
 		for (i = 0; i < length; i++)
 			arr[i] = tempArray[i];
 	}

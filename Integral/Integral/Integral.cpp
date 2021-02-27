@@ -6,6 +6,7 @@
 #include <cmath>
 #include "omp.h"
 #include <thread>
+#include <io.h>
 
 inline double F(double x)
 {
@@ -81,7 +82,8 @@ double long Integral(long double a, long double b, long double eps, int p) {
 int main()
 {
 	auto start_time = std::chrono::high_resolution_clock::now();
-	printf("Result %f\n",Integral(0,10,1e-10,1e6));
+	//cout << Integral(0, 1, 1e-10, 100) << endl;
+	printf("Result %.15f\n",Integral(0,1,1e-13,100));
 	auto stop_time = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_time - start_time);
 	printf("Time spent: %d\n", duration.count());
