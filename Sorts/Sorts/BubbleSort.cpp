@@ -15,10 +15,6 @@ public:
 				segmentSort(arr, segmentCount, i, length);
 			}
 		}
-		for (int i = 0; i < length; i++)
-		{
-			printf("%.0f\n", arr[i]);
-		}
 		merge(arr, segmentCount, length);
 	}
 

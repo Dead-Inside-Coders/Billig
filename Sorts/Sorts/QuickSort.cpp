@@ -70,14 +70,11 @@ private:
 					l++; r--;
 				}
 			}
-			bool p1, p2;
-			p1 = (r - start) > deapnesLimit;
-			p2 = (finish - l) > deapnesLimit;
 #pragma omp parallel sections
 			{
 #pragma omp section
 				{
-					if (p1)
+					if ((r - start) > deapnesLimit)
 					{
 
 						pQSort(arr, start, r, deapnesLimit);
@@ -90,7 +87,7 @@ private:
 				}
 #pragma omp section
 				{
-					if (p2)
+					if ((finish - l) > deapnesLimit)
 					{
 						{
 							pQSort(arr, l, finish, deapnesLimit);
