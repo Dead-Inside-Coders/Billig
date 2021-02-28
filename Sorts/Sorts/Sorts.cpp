@@ -11,7 +11,7 @@
 
 int main()
 {
-    int arrayLength = 1e7;
+    int arrayLength = 10000000;
     double* arr = new double[arrayLength];
     for (int i = 0; i < arrayLength; i++)
     {
@@ -22,9 +22,9 @@ int main()
     BubbleSort bubbleSort;
     QuickSort quickSort;
     auto start_time = std::chrono::high_resolution_clock::now();
-   // bubbleSort.sort(arr,4, arrayLength);
-     //quickSort.quickSort(arr,1, arrayLength);
-     quickSort.pQuickSort(arr, arrayLength, 100000);
+   // bubbleSort.sort(arr,1000, arrayLength);
+     //quickSort.quickSort(arr,10, arrayLength);
+     quickSort.pQuickSort(arr, arrayLength, 10000);
     auto stop_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_time - start_time);
     printf("Time spent for sort sort: %d\n", duration.count());
