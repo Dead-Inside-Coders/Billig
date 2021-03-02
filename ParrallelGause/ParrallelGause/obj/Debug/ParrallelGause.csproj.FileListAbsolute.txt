@@ -1,0 +1,7 @@
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\obj\Debug\ParrallelGause.csprojAssemblyReference.cache
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\obj\Debug\ParrallelGause.csproj.CoreCompileInputs.cache
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\bin\Debug\ParrallelGause.exe.config
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\bin\Debug\ParrallelGause.exe
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\bin\Debug\ParrallelGause.pdb
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\obj\Debug\ParrallelGause.exe
+C:\Users\Egor_Zavgorodnev\source\repos\ParrallelGause\ParrallelGause\obj\Debug\ParrallelGause.pdb
