@@ -83,7 +83,7 @@ int main()
 {
 	auto start_time = std::chrono::high_resolution_clock::now();
 	//cout << Integral(0, 1, 1e-10, 100) << endl;
-	printf("Result %.15f\n",Integral(0,1,1e-13,100));
+	printf("Result %.15f\n", Integral(0, 1, 1e-18, 1000));
 	auto stop_time = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_time - start_time);
 	printf("Time spent: %d\n", duration.count());
