@@ -6,7 +6,7 @@ class BubbleSort
 {
 public:
 	void sort(double* arr, int segmentCount, int length) {
-
+		//omp_set_num_threads(5);
 #pragma omp parallel
 		{
 #pragma omp for

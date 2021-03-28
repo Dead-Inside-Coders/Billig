@@ -7,12 +7,12 @@ namespace Integral
     class Program
     {
 
-       static double F(double x)
+        static double F(double x)
         {
             return 4 / (1 + Math.Pow(x, 2)); // Math.Pow(x, 2) * Math.Sin(x);
         }
 
-       static double definiteIntegralT(double start, double finish, double eps)
+        static double definiteIntegralT(double start, double finish, double eps)
         {
 
             int n = 1;
@@ -52,19 +52,23 @@ namespace Integral
         }
 
 
+
         static double Integral(double a, double b, double eps, int p)
         {
 
             double[] result = new double[p];
 
-            Parallel.For(0, p, (i) =>
+           // ParallelOptions cc = new ParallelOptions();
+            //cc.MaxDegreeOfParallelism = 1;
+            //System.Threading.ThreadPool.SetMaxThreads(1,1);
+            Parallel.For(0, p  ,(i) =>
             {
                 double dx = (b - a) / p;
                 double start = 0, finish = 0;
                 start = a + i * dx;
                 finish = start + dx;
                 result[i] = definiteIntegralT(start, finish, eps);
-            });
+            }); ;
 
             double finalResult = 0;
 
@@ -82,11 +86,11 @@ namespace Integral
             Stopwatch stopwatch = Stopwatch.StartNew();
             //DateTime start, finish;
             //start = DateTime.Now;
-            stopwatch.Start(); 
-            Console.WriteLine("Result "+ Integral(0, 1, 1e-18, 4000));
+            stopwatch.Start();
+             Console.WriteLine("Result " + Integral(0, 1, 1e-16, 200));
             //finish = DateTime.Now;
             stopwatch.Stop();
-            Console.WriteLine("Time " + stopwatch.ElapsedMilliseconds);//((finish - start).Ticks * 1e-8));//.Duration().Milliseconds));
+            Console.WriteLine("Time " + stopwatch.ElapsedMilliseconds );//((finish - start).Ticks * 1e-8));//.Duration().Milliseconds));
         }
     }
 }

@@ -10,7 +10,9 @@ namespace Sorts
     {
         public void sort(double[] arr, int segmentCount)
         {
-            Parallel.For(0, segmentCount, (i) =>
+            //ParallelOptions p = new ParallelOptions();
+            //p.MaxDegreeOfParallelism = 5;
+            Parallel.For(0, segmentCount ,(i) =>
             {
                 segmentSort(arr, segmentCount, i);
             });

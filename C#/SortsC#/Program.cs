@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Sorts
 {
@@ -6,7 +7,7 @@ namespace Sorts
     {
         static void Main(string[] args)
         {
-            double[] array = new double[100000000];
+            double[] array = new double[1_000_000];
             Random a = new Random();
             for (int i = 0; i < array.Length; i++)
             {
@@ -14,13 +15,13 @@ namespace Sorts
             }
             BubbleSort bubbleSort = new BubbleSort();
             QuicSort quicSort = new QuicSort();
-
-            DateTime start = DateTime.Now;
-            quicSort.pQuickSort(array,10000);
-            DateTime finish = DateTime.Now;
-            double time = (finish - start).Ticks * 1e-7;
-
-            Console.WriteLine("Время сортировки массива " + time);
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            
+           // 
+            stopwatch.Start();
+            quicSort.pQuickSort(array, 1_000_000);
+            stopwatch.Stop();
+            Console.WriteLine("Time " + stopwatch.ElapsedMilliseconds);
         }
     }
 }

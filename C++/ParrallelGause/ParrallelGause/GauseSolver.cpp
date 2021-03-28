@@ -13,7 +13,7 @@ public:
 
 	bool solve(float* M, int length, int rowCount)
 	{
-
+		//omp_set_num_threads(5);
 		// pivoting
 		for (int col = 0; col + 1 < rowCount; col++)
 		{
@@ -38,6 +38,7 @@ public:
 			}
 		}
 		// elimination
+		omp_set_num_threads(5);
 #pragma omp parallel
 		{
 
@@ -61,6 +62,7 @@ public:
 			if (f == 0) return false;
 
 			for (int i = 0; i < rowCount + 1; i++) M[row, i] /= f;
+			omp_set_num_threads(5);
 #pragma omp parallel 
 			{
 #pragma omp for

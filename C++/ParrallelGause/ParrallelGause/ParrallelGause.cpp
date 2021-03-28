@@ -9,7 +9,7 @@
 int main()
 {
 
-    int equations_amount = 1300;
+    int equations_amount = 2000;
 
     float* matrix = new float[equations_amount, equations_amount + 1];
 

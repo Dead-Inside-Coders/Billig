@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace ParrallelGause
     {
         public static void Main(String[] args)
         {
-            int equations_amount = 1300;
+            int equations_amount = 2000;
 
            // float[,] matrix = new float[equations_amount, equations_amount + 1];
             float[,] copyMatrix = new float[equations_amount, equations_amount + 1];
@@ -32,10 +33,11 @@ namespace ParrallelGause
             //double time = (end - start).Ticks;
             //Console.WriteLine(" Gause Time: " + time);
 
-            DateTime start1 = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
             ParallelGause.Solve(copyMatrix); 
-            DateTime end1 = DateTime.Now;
-            double time1 = (end1 - start1).Ticks * 1e-7; 
+            stopwatch.Stop();
+            double time1 = stopwatch.ElapsedMilliseconds; 
             Console.WriteLine(" Parallel Gause Time: " + time1);
 
             Console.ReadKey();

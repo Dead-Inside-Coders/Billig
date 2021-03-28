@@ -8,6 +8,7 @@ public:
 	{
 		int n = arrayLength;
 		int m = n / segmentCount;
+		/*omp_set_num_threads(5);*/
 #pragma omp parallel
 		{
 #pragma omp for
@@ -23,6 +24,7 @@ public:
 
 	void pQuickSort(double* arr, int arrayLength, int deapnesLimit)
 	{
+		//omp_set_num_threads(1);
 		pQSort(arr, 0, arrayLength - 1, deapnesLimit);
 	}
 
@@ -70,6 +72,7 @@ private:
 					l++; r--;
 				}
 			}
+			
 #pragma omp parallel sections
 			{
 #pragma omp section

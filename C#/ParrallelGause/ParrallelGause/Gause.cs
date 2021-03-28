@@ -55,6 +55,7 @@ namespace ParrallelGause
             // elimination
             for (int sourceRow = 0; sourceRow + 1 < rowCount; sourceRow++)
             {
+
                 for (int destRow = sourceRow + 1; destRow < rowCount; destRow++)
                 {
                     float df = M[sourceRow, sourceRow];

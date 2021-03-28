@@ -52,10 +52,11 @@ namespace ParrallelGause
                     }
                     else return false; // no, then the matrix has no unique solution
                 }
-
+            ParallelOptions op = new ParallelOptions();
+            op.MaxDegreeOfParallelism = 5;
             // elimination
             //parallel for
-            Parallel.For(0, rowCount - 1, (sourceRow) => {
+            Parallel.For(0, rowCount - 1,op, (sourceRow) => {
                 for (int destRow = sourceRow + 1; destRow < rowCount; destRow++)
                 {
                     float df = M[sourceRow, sourceRow];
@@ -73,7 +74,7 @@ namespace ParrallelGause
 
                 for (int i = 0; i < rowCount + 1; i++) M[row, i] /= f;
                 //parallel for
-                Parallel.For(0, row, (destRow) => {
+                Parallel.For(0, row, op, (destRow) => {
                     M[destRow, rowCount] -= M[destRow, row] * M[row, rowCount];
                     M[destRow, row] = 0;
                 });
@@ -87,6 +88,7 @@ namespace ParrallelGause
                 return min;
             return min + new Random().Next() % (max - min);
         }
+           
     }
 
 }

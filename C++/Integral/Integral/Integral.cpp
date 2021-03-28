@@ -55,7 +55,7 @@ double long definiteIntegralT(long double start, long double finish, long double
 double long Integral(long double a, long double b, long double eps, int p) {
 
 	double* result = new double[p];
-	//omp_set_num_threads(120);
+//omp_set_num_threads(5);
 #pragma omp parallel
 	{
 #pragma omp for
@@ -83,7 +83,10 @@ int main()
 {
 	auto start_time = std::chrono::high_resolution_clock::now();
 	//cout << Integral(0, 1, 1e-10, 100) << endl;
-	printf("Result %.15f\n", Integral(0, 1, 1e-18, 1000));
+	/*for (size_t i = 0; i < 5; i++)
+	{*/
+		printf("Result %.15f\n", Integral(0, 1, 1e-15, 200));
+	//}
 	auto stop_time = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_time - start_time);
 	printf("Time spent: %d\n", duration.count());

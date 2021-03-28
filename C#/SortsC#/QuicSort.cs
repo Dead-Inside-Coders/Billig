@@ -10,9 +10,11 @@ namespace Sorts
 
         public void quickSort(double[] arr, int segmentCount)
         {
+            //ParallelOptions p = new ParallelOptions();
+            //p.MaxDegreeOfParallelism = 3;
             int n = arr.Length;
             int m = n / segmentCount;
-            Parallel.For(0, segmentCount, (i) =>
+            Parallel.For(0, segmentCount,(i) =>
             {
                 int start = i * m;
                 int finish = i != segmentCount - 1 ? start + m - 1 : n - 1;
